@@ -1,19 +1,16 @@
-
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
-    ]
+    path: '/overview',
+    name: 'overview',
+    component: () => import('pages/Login'),
+    meta: {
+      title: 'CMS Map',
+      icon: 'pin_drop',
+      hide: true,
+      hideChildren: false,
+      permissions: 'sidebar:cms_map',
+    },
   },
+];
 
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
-]
-
-export default routes
+export default routes;
