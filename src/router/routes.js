@@ -4,11 +4,11 @@ const routes = [
     name: 'overview',
     component: () => import('pages/Login'),
     meta: {
-      title: 'CMS Map',
+      title: 'overview',
       icon: 'pin_drop',
-      hide: true,
-      hideChildren: false,
-      permissions: 'sidebar:cms_map',
+      hide: false,
+      hideChildren: true,
+      permissions: 'sidebar:overview',
     },
   },
 ];
