@@ -91,7 +91,7 @@ const routeActive = (item) => {
   return false;
 };
 const hasPermission = (props) => {
-  return true;
+  return props !== null ? true : false;
   // const permissions = store.getters['app/getAuthMeta']?.permissions || [];
   // return permissions.length ? permissions.indexOf(props) !== -1 : false;
 };
