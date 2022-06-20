@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/overview',
     name: 'overview',
-    component: () => import('pages/Login'),
+    component: () => import('pages/Overview'),
     meta: {
       title: 'overview',
       icon: 'pin_drop',
