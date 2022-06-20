@@ -3,5 +3,8 @@
 
 export default {
   failed: 'Action failed',
-  success: 'Action was successful'
+  success: 'Action was successful',
+  Lang: 'Lang',
+  'Lang EN': 'Lang EN',
+  'Lang ZH': 'Lang ZH',
 }
