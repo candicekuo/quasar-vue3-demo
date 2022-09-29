@@ -77,11 +77,7 @@ module.exports = configure(function (ctx) {
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
 
-      chainWebpack(chain) {
-        chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
-        // chain.resolve.alias.set('utils', path.resolve(__dirname, './src/utils'));
-        chain.resolve.alias.set('mixin', path.resolve(__dirname, './src/mixin'));
-      },
+      // https://quasar.dev/quasar-cli/handling-webpack
 
       // svg 設定
       // https://ithelp.ithome.com.tw/articles/10230334
@@ -100,6 +96,11 @@ module.exports = configure(function (ctx) {
           .options({ symbolId: 'icon-[name]' });
         // 修改 images-loader 配置
         chain.module.rule('images').exclude.add(resolve('src/assets/icons'));
+      },
+      chainWebpack(chain) {
+        chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
+        // chain.resolve.alias.set('utils', path.resolve(__dirname, './src/utils'));
+        chain.resolve.alias.set('mixin', path.resolve(__dirname, './src/mixin'));
       },
       env: process.env,
     },
