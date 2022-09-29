@@ -81,6 +81,7 @@ module.exports = configure(function (ctx) {
 
       // svg 設定
       // https://ithelp.ithome.com.tw/articles/10230334
+
       chainWebpack(chain) {
         // 先刪除預設的svg配置
         chain.module.rules.delete('svg');
@@ -96,10 +97,8 @@ module.exports = configure(function (ctx) {
           .options({ symbolId: 'icon-[name]' });
         // 修改 images-loader 配置
         chain.module.rule('images').exclude.add(resolve('src/assets/icons'));
-      },
-      chainWebpack(chain) {
+
         chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
-        // chain.resolve.alias.set('utils', path.resolve(__dirname, './src/utils'));
         chain.resolve.alias.set('mixin', path.resolve(__dirname, './src/mixin'));
       },
       env: process.env,
