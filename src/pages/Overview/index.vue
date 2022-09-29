@@ -3,6 +3,7 @@
     <p>over view</p>
   </div>
   <p>test: {{ t('Lang') }}</p>
+  <svg-icon name="file_icon" />
 </template>
 
 <script setup>

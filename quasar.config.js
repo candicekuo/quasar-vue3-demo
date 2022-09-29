@@ -5,6 +5,15 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+// svg 設定
+// https://github.com/JetBrains/svg-sprite-loader
+// https://ithelp.ithome.com.tw/articles/10230334
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, '.', dir);
+}
+
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
@@ -25,7 +34,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
-    boot: ['i18n', 'axios'],
+    boot: ['i18n', 'axios', 'svgIcon'],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: ['app.scss'],
@@ -71,6 +80,26 @@ module.exports = configure(function (ctx) {
       chainWebpack(chain) {
         chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
         // chain.resolve.alias.set('utils', path.resolve(__dirname, './src/utils'));
+        chain.resolve.alias.set('mixin', path.resolve(__dirname, './src/mixin'));
+      },
+
+      // svg 設定
+      // https://ithelp.ithome.com.tw/articles/10230334
+      chainWebpack(chain) {
+        // 先刪除預設的svg配置
+        chain.module.rules.delete('svg');
+
+        // 新增 svg-sprite-loader 設定
+        chain.module
+          .rule('svg-sprite-loader')
+          .test(/\.svg$/)
+          .include.add(resolve('src/assets/icons'))
+          .end()
+          .use('svg-sprite-loader')
+          .loader('svg-sprite-loader')
+          .options({ symbolId: 'icon-[name]' });
+        // 修改 images-loader 配置
+        chain.module.rule('images').exclude.add(resolve('src/assets/icons'));
       },
       env: process.env,
     },
